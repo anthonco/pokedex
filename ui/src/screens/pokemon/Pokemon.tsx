@@ -65,7 +65,7 @@ const Pokemon: React.FC<RouteComponentProps & { clickLink: Function }> = ({
         {pokemonList.map(pokemon => (
           <Link to={pokemon.id} onMouseDown={clickLink as any}>
             <ListItem>
-              <img src={pokemon.img} />
+              <img src={pokemon.img} alt={'a pokemon'} />
               {pokemon.name} - {pokemon.num}
             </ListItem>
           </Link>
