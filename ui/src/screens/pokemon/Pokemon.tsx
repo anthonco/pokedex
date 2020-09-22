@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { RouteComponentProps, Link } from '@reach/router'
 import { useQuery, gql } from '@apollo/client'
 import { Container as NesContainer } from 'nes-react'
+import PKSearch from '../../components/PkSearch'
 
 const Container = styled(NesContainer)`
   && {
@@ -52,7 +53,9 @@ const Pokemon: React.FC<RouteComponentProps & { clickLink: Function }> = ({
     | Array<{ id: string; name: string; img: string; num: string }>
     | undefined = data?.pokemonMany
 
-  if (loading) {
+    // console.log(pokemonList)
+  
+    if (loading) {
     return <p>Loading...</p>
   }
   if (error || !pokemonList) {
@@ -61,10 +64,11 @@ const Pokemon: React.FC<RouteComponentProps & { clickLink: Function }> = ({
 
   return (
     <Container rounded>
+      <PKSearch name='Corey' />
       <List>
         {pokemonList.map(pokemon => (
           <Link to={pokemon.id} onMouseDown={clickLink as any}>
-            <ListItem>
+            <ListItem key={pokemon.id}>
               <img src={pokemon.img} alt={'a pokemon'} />
               {pokemon.name} - {pokemon.num}
             </ListItem>
