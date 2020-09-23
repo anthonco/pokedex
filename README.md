@@ -7,5 +7,5 @@ Justification for using Fuse.js library for for a fuzzy search:
 - Well known
 - Searches an arrays of objects and so will work well with what the Pokemon API returns
 
-Option 2 - GraphQL search.
-Option 3 - Build your own fuzzy search.
+Option 2 - GraphQL search.  
+Option 3 - Build your own fuzzy search.  
