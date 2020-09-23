@@ -53,7 +53,7 @@ const Pokemon: React.FC<RouteComponentProps & { clickLink: Function }> = ({
     | Array<{ id: string; name: string; img: string; num: string }>
     | undefined = data?.pokemonMany
 
-    // console.log(pokemonList)
+    console.log(pokemonList)
   
     if (loading) {
     return <p>Loading...</p>
