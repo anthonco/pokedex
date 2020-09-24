@@ -1,24 +1,32 @@
-import React from 'react'
-import { gql } from '@apollo/client'
-
-const POKEMON_QRY = gql`
-  query($skip: Int, $limit: Int) {
-    pokemonMany(skip: $skip, limit: $limit) {
-      id
-      name
-      num
-      img
-    }
-  }
-`
+import React, { useState }  from 'react'
 
 type PKSearchProps = {
-  name: string;
+  name: string
+  response: any
 }
 
-const PKSearch:React.FC<PKSearchProps> = ({ name }) => {
+function _onChange(e: React.ChangeEvent) {
+  const value = (e.target as HTMLInputElement).value
+  console.log("clicked",value)
+}
+
+const PKSearch:React.FC<PKSearchProps> = ({ name, response }) => {
+  
   // name is string!
-  return <h1>Hello {name}</h1>
+  response("2")
+
+  return (
+  <div>
+    <h1>Hello {name}</h1>
+    <input
+      className="react-search-field-input"
+      onChange={_onChange}
+      placeholder="Search"
+      type="text"
+      value={"hello"}
+    />
+  </div>
+  )
 };
 
 export default PKSearch

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState }  from 'react'
 import styled from 'styled-components'
 import { RouteComponentProps, Link } from '@reach/router'
 import { useQuery, gql } from '@apollo/client'
@@ -45,10 +45,30 @@ const POKEMON_MANY = gql`
   }
 `
 
+const POKEMON_MANY2 = gql`
+  query($skip: Int, $limit: Int) {
+    pokemonMany(skip: $skip, limit: $limit) {
+      id
+      name
+      weight
+      img
+    }
+  }
+`
+
+function handleSearch(searchTerm: String) {
+  console.log(searchTerm)
+}
+
+
 const Pokemon: React.FC<RouteComponentProps & { clickLink: Function }> = ({
   clickLink,
 }) => {
-  const { loading, error, data } = useQuery(POKEMON_MANY)
+
+  const [pkQuery, setpkQuery] = useState(POKEMON_MANY2)
+
+  // const { loading, error, data } = useQuery(POKEMON_MANY)
+  const { loading, error, data } = useQuery(pkQuery)
   const pokemonList:
     | Array<{ id: string; name: string; img: string; num: string }>
     | undefined = data?.pokemonMany
@@ -64,7 +84,7 @@ const Pokemon: React.FC<RouteComponentProps & { clickLink: Function }> = ({
 
   return (
     <Container rounded>
-      <PKSearch name='Corey' />
+      <PKSearch name='Corey' response={handleSearch} />
       <List>
         {pokemonList.map(pokemon => (
           <Link to={pokemon.id} onMouseDown={clickLink as any}>
