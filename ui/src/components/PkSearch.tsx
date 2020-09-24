@@ -1,29 +1,29 @@
 import React, { useState }  from 'react'
 
 type PKSearchProps = {
-  name: string
   response: any
 }
 
-function _onChange(e: React.ChangeEvent) {
-  const value = (e.target as HTMLInputElement).value
-  console.log("clicked",value)
-}
+const PKSearch:React.FC<PKSearchProps> = ({ response }) => {
 
-const PKSearch:React.FC<PKSearchProps> = ({ name, response }) => {
+  console.log("PKSearch component")
+
+  const [searchVal, setSearchValue] = React.useState("")
+
+  function _onChange(e: React.ChangeEvent) {
+    const updatedValue = (e.target as HTMLInputElement).value
+    setSearchValue(updatedValue)
+    response(updatedValue)
+  }
   
-  // name is string!
-  response("2")
-
   return (
   <div>
-    <h1>Hello {name}</h1>
     <input
       className="react-search-field-input"
       onChange={_onChange}
-      placeholder="Search"
+      placeholder="Search Pokedex"
       type="text"
-      value={"hello"}
+      value={searchVal}
     />
   </div>
   )

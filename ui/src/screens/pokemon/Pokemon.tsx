@@ -57,7 +57,7 @@ const POKEMON_MANY2 = gql`
 `
 
 function handleSearch(searchTerm: String) {
-  console.log(searchTerm)
+  console.log("handleSearch",searchTerm)
 }
 
 
@@ -65,10 +65,7 @@ const Pokemon: React.FC<RouteComponentProps & { clickLink: Function }> = ({
   clickLink,
 }) => {
 
-  const [pkQuery, setpkQuery] = useState(POKEMON_MANY2)
-
-  // const { loading, error, data } = useQuery(POKEMON_MANY)
-  const { loading, error, data } = useQuery(pkQuery)
+  const { loading, error, data } = useQuery(POKEMON_MANY2)
   const pokemonList:
     | Array<{ id: string; name: string; img: string; num: string }>
     | undefined = data?.pokemonMany
@@ -84,7 +81,7 @@ const Pokemon: React.FC<RouteComponentProps & { clickLink: Function }> = ({
 
   return (
     <Container rounded>
-      <PKSearch name='Corey' response={handleSearch} />
+      <PKSearch response={handleSearch} />
       <List>
         {pokemonList.map(pokemon => (
           <Link to={pokemon.id} onMouseDown={clickLink as any}>
